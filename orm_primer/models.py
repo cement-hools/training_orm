@@ -13,24 +13,25 @@ class Post(models.Model):
 
 
 class Station(models.Model):
-    station_name = models.TextField()
+    station_name = models.TextField(max_length=10)
 
     def __str__(self):
         return self.station_name
 
+
 class Operator(models.Model):
-    name = models.TextField()
-    # station = models.ForeignKey(
-    #     Station, on_delete=models.CASCADE, related_name="station")
+    name = models.TextField(max_length=100)
+    stations = models.ManyToManyField(Station, related_name='operators')
 
     def __str__(self):
         return self.name
 
+
 class Work_in_station(models.Model):
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="operator")
+        Operator, on_delete=models.CASCADE, related_name="station_works")
     station = models.ForeignKey(
-        Station, on_delete=models.CASCADE, related_name="station")
+        Station, on_delete=models.CASCADE, related_name="operator_works")
 
     def __str__(self):
         name = (f"{self.operator}: {self.station}")

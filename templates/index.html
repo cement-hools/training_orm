@@ -9,29 +9,36 @@
 
 <body>
     <h1>Проверка ОРМ</h1>
-    <h2> Операторы</h2>
-    {% for operator in operators %}
     <h3>
-        Оператор: {{ operator }}
+        {{ data }}
     </h3>
-    <p>{{ post.text|linebreaksbr }}</p>
-    <hr>
+    
+    {% for name, list in data %}
+        <h4>
+            Значение: {{ name }}
+                
+        </h4>
+    {% endfor %}
+    
+    <h2> Операторы</h2>
+    {{operators}}
+    {% for operator in operators %}
+        <h4>
+            Оператор: {{ operator }} {% for station in operator.stations.all %} {{ station }}{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}
+        </h4>
     {% endfor %}
     <h2> Станции</h2>
+    {{station}}
     {% for station in stations %}
-    <h3>
-        Станция: {{ station }}
-    </h3>
-    <p>{{ post.text|linebreaksbr }}</p>
-    <hr>
+        <h4>
+            Станция: {{ station }}
+        </h4>
     {% endfor %}
     <h2> Работает</h2>
     {% for item in working %}
-    <h3>
-        Станция: {{ item.station }} Оператор: {{ item.operator }}
-    </h3>
-    <p>{{ post.text|linebreaksbr }}</p>
-    <hr>
+        <h4>
+            Станция: {{ item.station }} Оператор: {{ item.operator }}
+        </h4>
     {% endfor %}
 
 </body>
