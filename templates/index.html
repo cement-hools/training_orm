@@ -11,35 +11,35 @@
     <h1>Проверка ОРМ</h1>
     <h3>
         {{ data }}
+        <br>
+        {{ stations }}
     </h3>
-    
-    {% for name, list in data %}
-        <h4>
-            Значение: {{ name }}
-                
-        </h4>
-    {% endfor %}
-    
-    <h2> Операторы</h2>
-    {{operators}}
-    {% for operator in operators %}
-        <h4>
-            Оператор: {{ operator }} {% for station in operator.stations.all %} {{ station }}{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}
-        </h4>
-    {% endfor %}
-    <h2> Станции</h2>
-    {{station}}
-    {% for station in stations %}
-        <h4>
-            Станция: {{ station }}
-        </h4>
-    {% endfor %}
-    <h2> Работает</h2>
-    {% for item in working %}
-        <h4>
-            Станция: {{ item.station }} Оператор: {{ item.operator }}
-        </h4>
-    {% endfor %}
+    <div>
+        <h2> Операторы</h2>
+        {{operators}}
+        {% for operator in operators %}
+            <h4>
+                Оператор: {{ operator }} {% for station in operator.stations.all %} {{ station }}{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}
+            </h4>
+        {% endfor %}
+    </div>
+    <div>
+        {{rotation}}
+        <h2> Ротация </h2>
+        {% for station, operator in rotation.items %}
+            <h4>
+                Станция: {{ station }} - {{ operator}}
+            </h4>
+        {% endfor %}
+    </div>
+    <div>
+        <h2> Работает</h2>
+        {% for operator, stations in data.items %}
+            <h4>
+                Оператор: {{ operator }} Знает станции: {% for station in stations %} {{ station }}{% if not forloop.last %}, {% else %}.{% endif %}{% endfor %}
+            </h4>
+        {% endfor %}
+    </div>
 
 </body>
 

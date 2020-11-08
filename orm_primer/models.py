@@ -13,10 +13,10 @@ class Post(models.Model):
 
 
 class Station(models.Model):
-    station_name = models.TextField(max_length=10)
+    name = models.TextField(max_length=10)
 
     def __str__(self):
-        return self.station_name
+        return self.name
 
 
 class Operator(models.Model):
